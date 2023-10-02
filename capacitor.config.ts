@@ -10,6 +10,9 @@ const config: CapacitorConfig = {
   plugins:{
     SplashScreen: {
       launchAutoHide: false,
+    },
+    DeviceMotion: {
+      enabled: true
     }
   }
 };

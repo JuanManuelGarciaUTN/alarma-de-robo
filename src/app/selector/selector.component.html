@@ -1,0 +1,19 @@
+<ion-content [fullscreen]="true">
+  <div class="contenedor">
+    <button (click)="cerrarSesion()" class="cerrar-sesion">Cerrar Sesión</button>
+    <ion-button [ngClass]="{blanco: activado, rojo: !activado}" class="blanco" (click)="activar()" >
+      <ion-icon slot="icon-only" name="megaphone-outline"></ion-icon>
+    </ion-button>
+    <!-- <h2>x = {{x | number: '1.0-0'}}</h2>
+    <h2>y = {{y | number: '1.0-0'}}</h2>
+    <h2>z = {{z | number: '1.0-0'}}</h2> -->
+  </div>
+  <div class="pantalla-completa" *ngIf="intentoApagar">
+    <div>
+      <h2>Ingrese Contraseña</h2>
+      <input [(ngModel)]="texto" type="password">
+      <button (click)="verificarPass()">Okey</button>
+      <h2 *ngIf="passwordMal" class="red">¡Contraseña Incorrecta!</h2>
+    </div>
+  </div>
+</ion-content>

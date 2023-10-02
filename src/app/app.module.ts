@@ -9,11 +9,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { SelectorComponent } from './selector/selector.component';
+import { FormsModule } from '@angular/forms';
+import { Flashlight } from '@ionic-native/flashlight/ngx';
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, provideFirebaseApp(() => initializeApp(environment.firebase)), provideFirestore(() => getFirestore())],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  declarations: [AppComponent, SelectorComponent],
+  imports: [BrowserModule, FormsModule, IonicModule.forRoot(), AppRoutingModule, provideFirebaseApp(() => initializeApp(environment.firebase)), provideFirestore(() => getFirestore())],
+  providers: [
+    Flashlight,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

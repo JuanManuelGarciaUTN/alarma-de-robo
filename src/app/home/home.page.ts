@@ -17,7 +17,6 @@ export class HomePage {
   public cargando = false;
   
   constructor(private fb: FormBuilder,private router : Router, private db: BaseDeDatosService){ 
-    this.db.usuario = undefined;
     this.form = this.fb.group({
       'email': ['', [Validators.required, Validators.email]],
       'password':['', [Validators.required]],
@@ -25,15 +24,20 @@ export class HomePage {
   }
 
   ngAfterViewInit(){
-    setTimeout(()=>{
-      this.cargando = true;
+    if(this.db.usuario){
+      this.db.usuario = undefined;
+    }
+    else{
       setTimeout(()=>{
-        SplashScreen.hide();
+        this.cargando = true;
         setTimeout(()=>{
-          this.cargando = false;
-        }, 2500);
-      }, 1000);
-    },500);
+          SplashScreen.hide();
+          setTimeout(()=>{
+            this.cargando = false;
+          }, 2500);
+        }, 1000);
+      },500);
+    }
   }
 
   Login(){
@@ -46,7 +50,6 @@ export class HomePage {
       for(let datos of listaUsuarios){
         console.log(datos);
         if(datos.correo == usuario.email && datos.clave == usuario.password){
-          datos.clave = "";
           this.db.login(datos);
           this.validando = false;
           this.limpiarInputs();
